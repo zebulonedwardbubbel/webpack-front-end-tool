@@ -1,0 +1,9 @@
+@import "partial";
+
+$color-red: red;
+
+p {
+    background-color: $color-red;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
