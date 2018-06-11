@@ -5,11 +5,12 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 const cssnano = require('cssnano');
 const webpack = require('webpack');
-const devMode = process.env.NODE_ENV !== 'production';
 
-module.exports = {
+// https://github.com/webpack/webpack/issues/6460#issuecomment-364286147
+module.exports = (env, argv) => ({
     entry: './src/index.js',
     output: {
+        filename: '[name].[hash].js',
         path: path.resolve(__dirname, 'dist')
     },
     module: {
@@ -30,15 +31,17 @@ module.exports = {
             {
                 test: /\.(scss|css)$/,
                 use: [
-                    // MiniCssExtractPlugin.loader,
-                    devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
+                    argv.mode === 'production' ? MiniCssExtractPlugin.loader : 'style-loader',
                     {
                         loader: 'css-loader',
-                        options: {}
+                        options: {
+                            sourceMap: true
+                        }
                     },
                     {
                         loader: 'postcss-loader',
                         options: {
+                            sourceMap: true,
                             autoprefixer: {},
                             cssnano: {},
                             plugins: () => [
@@ -48,7 +51,10 @@ module.exports = {
                         }
                     },
                     {
-                        loader: 'sass-loader'
+                        loader: 'sass-loader',
+                        options: {
+                            sourceMap: true
+                        }
                     }
                 ]
             },
@@ -70,6 +76,7 @@ module.exports = {
         port: 9000,
         open: true
     },
+    // devtool: 'eval-source-map',
     plugins: [
         new CleanWebpackPlugin('./dist', {}),
         new HtmlWebpackPlugin({
@@ -80,12 +87,17 @@ module.exports = {
         //     template: './src/page2.html'
         // }),
         new MiniCssExtractPlugin(),
-        new webpack.NamedModulesPlugin(),
         new webpack.HotModuleReplacementPlugin()
-    ]
-    // optimization: {
-    //     nodeEnv: 'production',
-    //     minimize: true,
-    //     concatenateModules: true
-    // }
-};
+    ],
+    optimization: {
+        splitChunks: {
+            cacheGroups: {
+                commons: {
+                    test: /[\\/]node_modules[\\/]/,
+                    name: 'vendors',
+                    chunks: 'all'
+                }
+            }
+        }
+    }
+});

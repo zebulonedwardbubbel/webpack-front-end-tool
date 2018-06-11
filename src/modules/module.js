@@ -3,11 +3,9 @@ const testFn = () => {
     const secondVar = {
         amount: 7,
         product: 'Meth',
-        unitprice: 122
+        unitprice: 100
     };
-    const message = `Hello ${firstVar.name},
-    want to buy ${secondVar.amount} ounce of ${secondVar.product} for
-    a total of ${secondVar.amount * secondVar.unitprice} bucks?`;
+    const message = `Hello ${firstVar.name}, want to buy ${secondVar.amount} ounce of ${secondVar.product} for ${secondVar.amount * secondVar.unitprice} bucks?`;
 
     const paragraph = document.querySelector('p');
     paragraph.textContent = message;
