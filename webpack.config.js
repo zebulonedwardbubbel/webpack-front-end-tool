@@ -8,7 +8,7 @@ const webpack = require('webpack');
 
 // https://github.com/webpack/webpack/issues/6460#issuecomment-364286147
 module.exports = (env, argv) => ({
-    entry: './src/index.js',
+    entry: './src/js/index.js',
     output: {
         filename: '[name].[hash].js',
         path: path.resolve(__dirname, 'dist')
@@ -76,12 +76,14 @@ module.exports = (env, argv) => ({
         port: 9000,
         open: true
     },
-    // devtool: 'eval-source-map',
+    devtool: 'eval-source-map',
     plugins: [
         new CleanWebpackPlugin('./dist', {}),
         new HtmlWebpackPlugin({
             template: './src/index.html'
         }),
+        // to generate Multiple HTML Files
+        // https://github.com/jantimon/html-webpack-plugin#generating-multiple-html-files
         // new HtmlWebpackPlugin({
         //     filename: 'page2.html',
         //     template: './src/page2.html'
@@ -89,6 +91,7 @@ module.exports = (env, argv) => ({
         new MiniCssExtractPlugin(),
         new webpack.HotModuleReplacementPlugin()
     ],
+    // https://webpack.js.org/plugins/split-chunks-plugin/#split-chunks-example-2
     optimization: {
         splitChunks: {
             cacheGroups: {
