@@ -29,7 +29,7 @@ module.exports = (env, argv) => ({
                 loader: 'babel-loader'
             },
             {
-                test: /\.(scss|css)$/,
+                test: /\.(sass|scss|css)$/,
                 use: [
                     argv.mode === 'production' ? MiniCssExtractPlugin.loader : 'style-loader',
                     {
@@ -88,7 +88,9 @@ module.exports = (env, argv) => ({
         //     filename: 'page2.html',
         //     template: './src/page2.html'
         // }),
-        new MiniCssExtractPlugin(),
+        new MiniCssExtractPlugin({
+            filename: argv.mode === 'production' ? '[name].[hash].css' : '[name].[hash].css'
+        }),
         new webpack.HotModuleReplacementPlugin()
     ],
     // https://webpack.js.org/plugins/split-chunks-plugin/#split-chunks-example-2
