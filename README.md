@@ -1,4 +1,4 @@
-# webpack-4-frontend-tool
+# webpack4-front-end-tool
 
   - compiles [Sass](https://sass-lang.com/) / SCSS to CSS
   - [PostCSS](https://postcss.org/) + [Autoprefixer](https://autoprefixer.github.io/) + [CSSNano](http://cssnano.co/)
