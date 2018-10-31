@@ -1,0 +1,20 @@
+// =============================================================================
+// Fonts
+// =============================================================================
+$font-basepath: '../fonts';
+$font-name: /* Define webfont name here */;
+$font-weight-keywords: light, bold;
+$font-weights: 300, 600;
+
+@for $i from 1 through length($font-weight-keywords) {
+    $weight: nth($font-weights, $i);
+    $weight-keyword: nth($font-weight-keywords, $i);
+
+    @font-face {
+        font-family: '#{$font-name}';
+        src: url('#{$font-basepath}/#{$font-name}/#{$font-name}-#{$weight-keyword}/#{$font-name}-#{$weight-keyword}.woff2') format('woff2'),
+             url('#{$font-basepath}/#{$font-name}/#{$font-name}-#{$weight-keyword}/#{$font-name}-#{$weight-keyword}.woff') format('woff');
+        font-weight: #{$weight};
+        font-style: normal;
+    }
+}
