@@ -11,6 +11,25 @@
     </header>
     <main>
         <h2>Main content</h2>
+        <section>
+            <h3>SVG sprite options</h3>
+                <div>
+                    <p>external svg sprite: <br><i>requires svg-sprite-loader option extract to set true</i></p>
+                    <svg><use xlink:href="sprite.svg#test"></use></svg>
+                </div>
+                <div>
+                    <p>SVG sprite as CSS background-image:</p>
+                    <div class="img"></div>
+                </div>
+                <div>
+                    <p>Inline SVG sprite (inserted in document): <br><i>requires svg-sprite-loader option extract to set false</i></p>
+                    <svg><use xlink:href="#test"></use></svg>
+                </div>
+                <div>
+                    <p>SVG as img:</p>
+                    <img src="./images/test.svg" alt="">
+                </div>
+        </section>
     </main>
     <footer>
         <h2>Footer</h2>

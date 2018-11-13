@@ -2,6 +2,9 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
+// const SpritePlugin = require('extract-svg-sprite-webpack-plugin');
+// const SVGSpritemapPlugin = require('svg-spritemap-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 const cssnano = require('cssnano');
 const webpack = require('webpack');
@@ -31,7 +34,9 @@ module.exports = (env, argv) => ({
             {
                 test: /\.(sass|scss|css)$/,
                 use: [
-                    argv.mode === 'production' ? MiniCssExtractPlugin.loader : 'style-loader',
+                    argv.mode === 'production'
+                        ? MiniCssExtractPlugin.loader
+                        : 'style-loader',
                     {
                         loader: 'css-loader',
                         options: {
@@ -44,10 +49,7 @@ module.exports = (env, argv) => ({
                             sourceMap: true,
                             autoprefixer: {},
                             cssnano: {},
-                            plugins: () => [
-                                autoprefixer,
-                                cssnano
-                            ]
+                            plugins: () => [autoprefixer, cssnano]
                         }
                     },
                     {
@@ -76,20 +78,33 @@ module.exports = (env, argv) => ({
                 }
             },
             {
-                test: /\.(jpe?g|png|gif|svg)$/,
+                test: /\.(jpe?g|png|gif)$/,
                 loader: 'image-webpack-loader',
                 // This will apply the loader before the other ones
                 enforce: 'pre'
             },
             {
-                test: /\.(woff(2)?|ttf|eot|svg)$/,
-                use: [{
-                    loader: 'file-loader',
-                    options: {
-                        name: '[name].[ext]',
-                        outputPath: 'fonts/'
+                test: /\.svg$/,
+                use: [
+                    {
+                        loader: 'svg-sprite-loader',
+                        options: {
+                            extract: true
+                        }
                     }
-                }]
+                ]
+            },
+            {
+                test: /\.(woff(2)?|ttf|eot)$/,
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            name: '[name].[ext]',
+                            outputPath: 'fonts/'
+                        }
+                    }
+                ]
             }
         ]
     },
@@ -102,9 +117,14 @@ module.exports = (env, argv) => ({
     },
     devtool: 'eval-source-map',
     plugins: [
-        new CleanWebpackPlugin('./dist', {}),
+        new CleanWebpackPlugin('./dist', {
+            // exclude: ['']
+        }),
         new HtmlWebpackPlugin({
             template: './src/index.html'
+        }),
+        new SpriteLoaderPlugin({
+            // plainSprite: true
         }),
         // to generate Multiple HTML Files
         // https://github.com/jantimon/html-webpack-plugin#generating-multiple-html-files
@@ -113,7 +133,10 @@ module.exports = (env, argv) => ({
         //     template: './src/page2.html'
         // }),
         new MiniCssExtractPlugin({
-            filename: argv.mode === 'production' ? '[name].[hash].css' : '[name].[hash].css'
+            filename:
+                argv.mode === 'production'
+                    ? '[name].[hash].css'
+                    : '[name].[hash].css'
         }),
         new webpack.HotModuleReplacementPlugin()
     ],
