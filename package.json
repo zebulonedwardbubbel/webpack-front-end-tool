@@ -8,27 +8,17 @@
     "dev": "webpack-dev-server --mode development",
     "build": "webpack --mode production"
   },
-  "babel": {
-    "presets": [
-      "env"
-    ],
-    "babelrc": false
-  },
   "eslintConfig": {
     "extends": "mito",
     "rules": {
       "linebreak-style": "off"
     }
   },
-  "browserslist": [
-    "last 2 versions",
-    "IE > 10"
-  ],
   "devDependencies": {
+    "@babel/core": "^7.4.5",
+    "@babel/preset-env": "^7.4.5",
     "autoprefixer": "^8.5.1",
-    "babel-core": "^6.26.3",
-    "babel-loader": "^7.1.4",
-    "babel-preset-env": "^1.6.1",
+    "babel-loader": "^8.0.6",
     "clean-webpack-plugin": "^0.1.19",
     "css-loader": "^0.28.11",
     "cssnano": "^3.10.0",
@@ -52,6 +42,7 @@
   },
   "main": "index.js",
   "dependencies": {
+    "@babel/polyfill": "^7.4.4",
     "svgo-loader": "^2.2.0"
   }
 }

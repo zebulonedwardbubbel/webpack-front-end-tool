@@ -3,8 +3,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
-// const SpritePlugin = require('extract-svg-sprite-webpack-plugin');
-// const SVGSpritemapPlugin = require('svg-spritemap-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 const cssnano = require('cssnano');
 const webpack = require('webpack');
@@ -29,7 +27,9 @@ module.exports = (env, argv) => ({
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
-                loader: 'babel-loader'
+                use: {
+                    loader: 'babel-loader'
+                }
             },
             {
                 test: /\.(sass|scss|css)$/,
