@@ -12,10 +12,11 @@ const presets = [
                 safari: '11.1'
             },
             // debug: true,
-            useBuiltIns: 'usage',
-            corejs: {
-                version: '3.1'
-            }
+            useBuiltIns: 'entry'
+            // useBuiltIns: 'usage',
+            // corejs: {
+            //     version: '3.1'
+            // }
         }
     ]
 ];
