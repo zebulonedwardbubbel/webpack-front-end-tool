@@ -6,17 +6,14 @@ const presets = [
             // https://babeljs.io/docs/en/usage#overview
             targets: {
                 ie: '11',
-                edge: '17',
-                firefox: '60',
-                chrome: '67',
                 safari: '11.1'
             },
             // debug: true,
-            useBuiltIns: 'entry'
-            // useBuiltIns: 'usage',
-            // corejs: {
-            //     version: '3.1'
-            // }
+            // useBuiltIns: 'entry',
+            useBuiltIns: 'usage',
+            corejs: {
+                version: '3'
+            }
         }
     ]
 ];

@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "A Webpack 4 based front-end tool",
   "author": "szabolcs kertesz",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zebulonedwardbubbel/webpack4-front-end-tool"
+  },
   "license": "MIT",
   "scripts": {
     "dev": "webpack-dev-server --mode development",
@@ -43,6 +47,9 @@
   "main": "index.js",
   "dependencies": {
     "@babel/polyfill": "^7.7.0",
+    "browserslist": "^4.7.3",
+    "caniuse-lite": "^1.0.30001012",
+    "core-js": "^3.4.4",
     "svgo-loader": "^2.2.1"
   }
 }
