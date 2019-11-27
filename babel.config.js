@@ -8,8 +8,7 @@ const presets = [
                 ie: '11',
                 safari: '11.1'
             },
-            // debug: true,
-            // useBuiltIns: 'entry',
+            debug: true,
             useBuiltIns: 'usage',
             corejs: {
                 version: '3'
