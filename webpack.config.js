@@ -70,7 +70,8 @@ module.exports = (env, argv) => ({
                 ]
             },
             {
-                test: /\.(jpe?g|png|gif)$/,
+                test: /images.*\.(jpe?g|png|gif|svg)$/,
+                exclude: path.resolve(__dirname, 'src/images/svg-sprite'),
                 loader: 'url-loader',
                 options: {
                     // Inline files smaller than 10 kB (10240 bytes)
@@ -78,18 +79,20 @@ module.exports = (env, argv) => ({
                 }
             },
             {
-                test: /\.(jpe?g|png|gif)$/,
+                test: /images.*\.(jpe?g|png|gif|svg)$/,
+                exclude: path.resolve(__dirname, 'src/images/svg-sprite'),
                 loader: 'image-webpack-loader',
                 // This will apply the loader before the other ones
                 enforce: 'pre'
             },
             {
                 test: /\.svg$/,
+                include: path.resolve(__dirname, 'src/images/svg-sprite'),
                 use: [
                     {
                         loader: 'svg-sprite-loader',
                         options: {
-                            extract: true
+                            extract: false
                         }
                     }
                 ]

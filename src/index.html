@@ -12,23 +12,30 @@
     <main>
         <h2>Main content</h2>
         <section>
-            <h3>SVG sprite options</h3>
-                <div>
-                    <p>external svg sprite: <br><i>requires svg-sprite-loader option extract to set true</i></p>
-                    <svg><use xlink:href="sprite.svg#test"></use></svg>
-                </div>
-                <div>
-                    <p>SVG sprite as CSS background-image:</p>
-                    <div class="img"></div>
-                </div>
-                <div>
-                    <p>Inline SVG sprite (inserted in document): <br><i>requires svg-sprite-loader option extract to set false</i></p>
-                    <svg><use xlink:href="#test"></use></svg>
-                </div>
-                <div>
-                    <p>SVG as img:</p>
-                    <img src="./images/test.svg" alt="">
-                </div>
+            <h3>Referencing images from HTML</h3>
+            <div>
+                <p>Inline SVG sprite (inlined into HTML):</p>
+<xmp>
+    <svg>
+        <use xlink:href="#test-image"></use>
+    </svg>
+</xmp>
+                <svg><use xlink:href="#test-image"></use></svg>
+            </div>
+            <div>
+                <p>images source path: <code>src="images/"</code></p>
+                <img src="images/test-image2.svg" alt="">
+            </div>
+        </section>
+        <section>
+            <h3>... and from CSS</h3>
+<pre>
+<code>
+    .img {
+        background-image: url('../images/image-name.ext');
+    }
+</code>
+</pre>
         </section>
     </main>
     <footer>
