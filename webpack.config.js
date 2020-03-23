@@ -115,7 +115,7 @@ module.exports = (env, argv) => ({
         contentBase: './dist',
         hot: true,
         inline: true,
-        port: 9000,
+        port: 8000,
         open: true
     },
     devtool: 'eval-source-map',
